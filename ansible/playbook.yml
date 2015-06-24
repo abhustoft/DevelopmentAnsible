@@ -1,0 +1,14 @@
+---
+- hosts: all
+  tasks:
+    - name: ensure ntpd is at the latest version
+      apt: pkg=ntp state=latest
+      notify:
+      - restart ntpd
+    - name: Add installation user
+      remote_user: root
+      user: name=alfbhust comment="Alf Bjorn Hustoft" groups=adm,vagrant,users
+  handlers:
+    - name: restart ntpd
+      service: name=ntpd state=restarted
+
