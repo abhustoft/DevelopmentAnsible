@@ -4,7 +4,8 @@
 * vagrant up
 * vagrant ssh
 * In /etc/ansible/hosts:
-```[local]
+```
+[local]
 127.0.0.1
 ```
 * sudo apt-add-repository -y ppa:ansible/ansible
@@ -13,5 +14,6 @@
 * cd /vagrant/ansible
 * Test: ansible local -m ping -s -k -u vagrant
 * Provision: ansible-playbook -s -k -u vagrant server.yml
-``` password: vagrant
+```
+password: vagrant
 ```
