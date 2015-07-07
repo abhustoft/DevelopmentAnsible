@@ -11,6 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
 
   config.vm.hostname = "DevelopmentVM"
+  config.vm.provision :shell, path: "bootstrapAnsible.sh"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
