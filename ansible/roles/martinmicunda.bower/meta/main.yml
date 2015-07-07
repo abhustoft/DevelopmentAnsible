@@ -13,4 +13,5 @@ galaxy_info:
   - web
 
 dependencies:
-  - role: martinmicunda.nodejs
+  - role: aeriscloud.nodejs
+  - role: AsianChris.npm
