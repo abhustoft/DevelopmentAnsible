@@ -7,7 +7,7 @@ Ansible stuff based on this tutorial: [Tutorial](https://serversforhackers.com/a
 Tested on Vagrant: config.vm.box = "ubuntu/trusty64"
 
 
-* vagrant up <elastic>/<junior>
-* vagrant ssh  <elastic>/<junior>
+* vagrant up elastic/junior
+* vagrant ssh  elastic/junior
 
 Ansible password: vagrant
