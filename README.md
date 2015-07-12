@@ -1,20 +1,13 @@
-#Development environment for my private projects
+#Development environments for my private projects
+
+### JuniorVM for development and hosting of the Junior sales app
+### ElasticVM for hosting Elasticsearch
 
 Ansible stuff based on this tutorial: [Tutorial](https://serversforhackers.com/an-ansible-tutorial)
 Tested on Vagrant: config.vm.box = "ubuntu/trusty64"
 
 
-* vagrant up --provision
-* vagrant ssh
+* vagrant up <elastic>/<junior>
+* vagrant ssh  <elastic>/<junior>
 
-* Edit /etc/ansible/ansible.cfg or ~/.ansible.cfg:
-```
-[defaults]
-host_key_checking = False
-```
-
-* cd /vagrant/ansible
-* Test: ansible local -m ping -s -k -u vagrant
-* Provision: ansible-playbook -s -k -u vagrant server.yml
-
-password: vagrant
+Ansible password: vagrant
