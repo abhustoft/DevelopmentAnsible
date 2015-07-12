@@ -1,7 +1,6 @@
 ---
-- hosts: local
+- hosts: junior
   roles:
-    - nginx
     - aeriscloud.nodejs
     - AsianChris.npm
     - martinmicunda.bower
