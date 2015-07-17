@@ -11,7 +11,8 @@ es_wait_for_listen: yes
 # - name: <plugin name, including optional version string>
 #   url: <optional url to download the plugin from>
 #   plugin_file: <optional plugin file to check if the plugin is installed>
-es_plugins: []
+es_plugins:
+  - name: elasticsearch/marvel/latest
 
 # Other settings can be set here
 
