@@ -8,6 +8,10 @@ Tested on Vagrant: config.vm.box = "ubuntu/trusty64"
 
 
 * vagrant up elastic/junior
+```
+sudo /usr/share/elasticsearch/bin/elasticsearch
+```
+
 * vagrant ssh  elastic/junior
 
 Ansible password: vagrant
