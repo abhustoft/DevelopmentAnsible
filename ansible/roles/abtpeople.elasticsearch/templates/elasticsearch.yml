@@ -40,7 +40,7 @@ cluster.name: "JuniorElasticCluster"
 #
 #node.name: "Franz Kafka"
 {% if es_etc_node_name is defined %}node.name: {{ es_etc_node_name }}{% endif %}
-node.name: "JuniorNode"
+#node.name: "JuniorNode"
 
 # Every node can be configured to allow or deny being eligible as the master,
 # and to allow or deny to store the data.

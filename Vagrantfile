@@ -8,37 +8,70 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "ubuntu/trusty64"
 
-  config.vm.define "elastic" do |elastic|
-    elastic.vm.hostname = "elastic"
-    elastic.vm.network "forwarded_port", guest: 9200, host: 9200
-    elastic.vm.provision :shell, path: "bootstrapAnsible.sh"
-    elastic.vm.network "private_network", ip: "192.168.22.10"
+  config.vm.define "elastic1" do |elastic1|
+    elastic1.vm.hostname = "elastic"
+    elastic1.vm.network "forwarded_port", guest: 9200, host: 9200
+    elastic1.vm.provision :shell, path: "bootstrapAnsible.sh"
+    elastic1.vm.network "private_network", ip: "192.168.22.10"
 
-    elastic.vm.provider "virtualbox" do |vb|
+    elastic1.vm.provider "virtualbox" do |vb|
          # Don't boot with headless mode
          vb.gui = false
-         vb.name = "ElasticVM"
+         vb.name = "ElasticVM1"
 
          # Use VBoxManage to customize the VM. For example to change memory:
          vb.customize ["modifyvm", :id, "--memory", "2048"]
     end
 
-    elastic.vm.provision "ansible" do |ansible|
+    elastic1.vm.provision "ansible" do |ansible|
 
         ansible.sudo = true
         ansible.sudo_user = 'root'
         ansible.ask_sudo_pass = true
 
         ansible.playbook = "./ansible/elastic.yml"
-    end
 
+        ansible.groups = {
+            "elastic" => ["elastic1", "elastic2"],
+            "junior" => ["junior"]
+        }
+    end
   end
+
+  config.vm.define "elastic2" do |elastic2|
+      elastic2.vm.hostname = "elastic"
+      elastic2.vm.network "forwarded_port", guest: 9200, host: 9201
+      elastic2.vm.provision :shell, path: "bootstrapAnsible.sh"
+      elastic2.vm.network "private_network", ip: "192.168.22.11"
+
+      elastic2.vm.provider "virtualbox" do |vb|
+           # Don't boot with headless mode
+           vb.gui = false
+           vb.name = "ElasticVM2"
+
+           # Use VBoxManage to customize the VM. For example to change memory:
+           vb.customize ["modifyvm", :id, "--memory", "2048"]
+      end
+
+      elastic2.vm.provision "ansible" do |ansible|
+
+          ansible.sudo = true
+          ansible.sudo_user = 'root'
+          ansible.ask_sudo_pass = true
+
+          ansible.playbook = "./ansible/elastic.yml"
+          ansible.groups = {
+            "elastic" => ["elastic1", "elastic2"],
+            "junior" => ["junior"]
+          }
+      end
+    end
 
   config.vm.define "junior" do |junior|
     junior.vm.hostname = "junior"
     junior.vm.network "forwarded_port", guest: 8081, host: 8081
     junior.vm.provision :shell, path: "bootstrapAnsible.sh"
-    junior.vm.network "private_network", ip: "192.168.22.11"
+    junior.vm.network "private_network", ip: "192.168.22.20"
 
     junior.vm.provider "virtualbox" do |vb|
          # Don't boot with headless mode
@@ -57,6 +90,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         #ansible.verbose = 'vvvv'
 
         ansible.playbook = "./ansible/junior.yml"
+        ansible.groups = {
+            "elastic" => ["elastic1", "elastic2"],
+            "junior" => ["junior"]
+        }
     end
 
   end
