@@ -20,7 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
          vb.name = "ElasticVM"
 
          # Use VBoxManage to customize the VM. For example to change memory:
-         # vb.customize ["modifyvm", :id, "--memory", "1024"]
+         vb.customize ["modifyvm", :id, "--memory", "2048"]
     end
 
     elastic.vm.provision "ansible" do |ansible|
