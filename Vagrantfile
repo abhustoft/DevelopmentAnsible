@@ -9,10 +9,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
 
   config.vm.define "elastic1" do |elastic1|
-    elastic1.vm.hostname = "elastic"
+    elastic1.vm.hostname = "elastic1"
     elastic1.vm.network "forwarded_port", guest: 9200, host: 9200
     elastic1.vm.provision :shell, path: "bootstrapAnsible.sh"
-    elastic1.vm.network "private_network", ip: "192.168.22.10"
+    #elastic1.vm.network "private_network", ip: "192.168.22.10"
+    elastic1.vm.network "public_network"
 
     elastic1.vm.provider "virtualbox" do |vb|
          # Don't boot with headless mode
@@ -39,10 +40,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "elastic2" do |elastic2|
-      elastic2.vm.hostname = "elastic"
+      elastic2.vm.hostname = "elastic2"
       elastic2.vm.network "forwarded_port", guest: 9200, host: 9201
       elastic2.vm.provision :shell, path: "bootstrapAnsible.sh"
-      elastic2.vm.network "private_network", ip: "192.168.22.11"
+      #elastic2.vm.network "private_network", ip: "192.168.22.11"
+      elastic2.vm.network "public_network"
 
       elastic2.vm.provider "virtualbox" do |vb|
            # Don't boot with headless mode
@@ -71,7 +73,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     junior.vm.hostname = "junior"
     junior.vm.network "forwarded_port", guest: 8081, host: 8081
     junior.vm.provision :shell, path: "bootstrapAnsible.sh"
-    junior.vm.network "private_network", ip: "192.168.22.20"
+    #junior.vm.network "private_network", ip: "192.168.22.20"
+    junior.vm.network "public_network"
 
     junior.vm.provider "virtualbox" do |vb|
          # Don't boot with headless mode
