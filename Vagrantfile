@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         ansible.sudo = true
         ansible.sudo_user = 'root'
         ansible.ask_sudo_pass = true
-
+        ansible.tags="debug"
         ansible.playbook = "./ansible/elastic.yml"
 
         ansible.groups = {

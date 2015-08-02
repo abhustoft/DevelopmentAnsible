@@ -1,3 +1,0 @@
----
-- name: Install Java
-  yum: name={{ java_package }} state=latest
