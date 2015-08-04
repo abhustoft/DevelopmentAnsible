@@ -1,5 +1,5 @@
 ---
 - hosts: elastic
   roles:
-    - ansiblebit.oracle-java
-    - abtpeople.elasticsearch
+    - openjdk-java
+    - elasticsearch

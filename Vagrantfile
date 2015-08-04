@@ -6,12 +6,12 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "http://tools.swergroup.com/downloads/wheezy32.box"
 
   config.vm.define "elastic1" do |elastic1|
     elastic1.vm.hostname = "elastic1"
     elastic1.vm.network "forwarded_port", guest: 9200, host: 9200
-    elastic1.vm.provision :shell, path: "bootstrapAnsible.sh"
+    #elastic1.vm.provision :shell, path: "bootstrapAnsible.sh"
     #elastic1.vm.network "private_network", ip: "192.168.22.10"
     elastic1.vm.network "public_network"
 
@@ -29,7 +29,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         ansible.sudo = true
         ansible.sudo_user = 'root'
         ansible.ask_sudo_pass = true
-        ansible.tags="debug"
+        ansible.inventory_path = ".vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory"
+        #ansible.tags="debug"
         ansible.playbook = "./ansible/elastic.yml"
 
         ansible.groups = {
