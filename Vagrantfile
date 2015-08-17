@@ -6,14 +6,18 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "http://tools.swergroup.com/downloads/wheezy32.box"
+  config.vm.box = "debian/jessie64"
+  # Just use the insecure_private_key for convenience
+  config.ssh.insert_key = false
+
 
   config.vm.define "elastic1" do |elastic1|
     elastic1.vm.hostname = "elastic1"
     elastic1.vm.network "forwarded_port", guest: 9200, host: 9200
     #elastic1.vm.provision :shell, path: "bootstrapAnsible.sh"
     #elastic1.vm.network "private_network", ip: "192.168.22.10"
-    elastic1.vm.network "public_network"
+    #elastic1.vm.network "public_network"
+    elastic1.vm.network "public_network", bridge: "eth0"
 
     elastic1.vm.provider "virtualbox" do |vb|
          # Don't boot with headless mode
@@ -22,6 +26,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
          # Use VBoxManage to customize the VM. For example to change memory:
          vb.customize ["modifyvm", :id, "--memory", "2048"]
+         #vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+         #vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
     end
 
     elastic1.vm.provision "ansible" do |ansible|
