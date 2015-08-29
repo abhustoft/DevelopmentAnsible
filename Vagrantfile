@@ -48,8 +48,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       elastic2.vm.hostname = "elastic2"
       elastic2.vm.network "forwarded_port", guest: 9200, host: 9201
       elastic2.vm.provision :shell, path: "bootstrapAnsible.sh"
-      #elastic2.vm.network "private_network", ip: "192.168.22.11"
-      elastic2.vm.network "public_network"
+      elastic1.vm.network "public_network", bridge: "wlan0"
 
       elastic2.vm.provider "virtualbox" do |vb|
            # Don't boot with headless mode
