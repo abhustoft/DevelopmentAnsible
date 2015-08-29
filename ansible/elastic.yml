@@ -1,5 +1,8 @@
 ---
-- hosts: elastic
+- hosts: elastic2
+  remote_user: vagrant
+  sudo: true
+  sudo_user: root
   roles:
     - openjdk-java
     - elasticsearch

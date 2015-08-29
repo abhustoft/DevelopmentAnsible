@@ -1,4 +1,4 @@
-- hosts: web
+- hosts: elastic1
   vars:
    - docroot: /var/www/serversforhackers.com/public
   tasks:

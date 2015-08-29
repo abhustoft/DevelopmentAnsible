@@ -14,10 +14,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "elastic1" do |elastic1|
     elastic1.vm.hostname = "elastic1"
     elastic1.vm.network "forwarded_port", guest: 9200, host: 9200
-    #elastic1.vm.provision :shell, path: "bootstrapAnsible.sh"
-    #elastic1.vm.network "private_network", ip: "192.168.22.10"
-    #elastic1.vm.network "public_network"
-    elastic1.vm.network "public_network", bridge: "eth0"
+    elastic1.vm.provision :shell, path: "bootstrapAnsible.sh"
+    elastic1.vm.network "public_network", bridge: "wlan0"
 
     elastic1.vm.provider "virtualbox" do |vb|
          # Don't boot with headless mode
