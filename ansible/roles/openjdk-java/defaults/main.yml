@@ -1,0 +1,9 @@
+---
+# Available options for installing Java Open JDK:
+#   openjdk-7-jre-headless
+#   openjdk-7-jre
+#   openjdk-6-jre
+#   openjdk-7-jdk
+#   openjdk-6-jdk
+java_versions:
+  - "openjdk-7-jre"

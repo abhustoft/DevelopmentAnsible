@@ -1,0 +1,38 @@
+---
+- name: Create bashrc dir
+  file:
+    path:  "/etc/bashrc.d"
+    state: directory
+  tags: prompt
+
+- name: Push bashrc parts
+  copy:
+    dest: "/etc/bashrc.d/{{ item }}"
+    src:  "{{ item }}"
+  with_items:
+    - prompt.sh
+    - history.sh
+    - options.sh
+    - env.sh
+  tags: prompt
+
+- name: Link prompt script on RHEL5
+  file:
+    dest:  "/etc/bash_completion.d/git-prompt.sh"
+    src:   "/usr/share/git-core/contrib/completion/git-prompt.sh"
+    state: link
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "5"
+  tags: prompt
+
+- name: Make bashrc include bashrc.d
+  lineinfile:
+    dest: "{{ etcbashrc[ansible_os_family] }}"
+    line: "for file in /etc/bashrc.d/*; do [ -r $file ] && source $file; done"
+  tags: prompt
+
+- name: Fix .bashrc in skel to not reset prompt
+  copy:
+    src:  "skel-bashrc"
+    dest: "/etc/skel/.bashrc"
+  when: ansible_os_family == "Debian"
+  tags: prompt

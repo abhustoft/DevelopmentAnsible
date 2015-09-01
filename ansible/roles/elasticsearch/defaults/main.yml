@@ -1,0 +1,11 @@
+---
+# Override if necessary
+es_install_base_version: 1.5
+
+# Override this with the plugins you want
+#
+# Example:
+# es_plugins:
+#  - fullname: "lmenezes/elasticsearch-kopf"
+#    dirname:  "kopf"
+es_plugins: []

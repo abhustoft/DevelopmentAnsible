@@ -1,0 +1,12 @@
+---
+- include: install.yml
+- include: locale.yml
+- include: ntp.yml
+- include: prompt.yml
+- include: vim.yml
+
+- include: groups.yml
+  when: group_list
+
+- include: users.yml
+  when: user_list

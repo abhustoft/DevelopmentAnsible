@@ -1,0 +1,14 @@
+---
+- name: Set up users
+  user:
+    name:    "{{ item.name }}"
+    comment: "{{ item.comment | default(omit) }}"
+    uid:     "{{ item.uid | default(omit) }}"
+    group:   "{{ item.group | default(item.name) }}"
+    state:   "{{ item.state }}"
+    system:  "{{ item.system | default(omit) }}"
+    shell:   "{{ item.shell | default(omit) }}"
+  with_items: user_list
+  tags:
+    - environment
+    - users

@@ -1,0 +1,33 @@
+[submodule "roles/common"]
+	path = roles/common
+	url = git@gitlab.fronter.net:ansible-roles/common.git
+[submodule "roles/elasticsearch"]
+	path = roles/elasticsearch
+	url = git@gitlab.fronter.net:ansible-roles/elasticsearch.git
+[submodule "roles/logstash-forwarder"]
+	path = roles/logstash-forwarder
+	url = git@gitlab.fronter.net:ansible-roles/logstash-forwarder.git
+[submodule "roles/nginx"]
+	path = roles/nginx
+	url = git@gitlab.fronter.net:ansible-roles/nginx.git
+[submodule "roles/nodejs"]
+	path = roles/nodejs
+	url = git@gitlab.fronter.net:ansible-roles/nodejs.git
+[submodule "roles/npm"]
+	path = roles/npm
+	url = git@gitlab.fronter.net:ansible-roles/npm.git
+[submodule "roles/openjdk-java"]
+	path = roles/openjdk-java
+	url = git@gitlab.fronter.net:ansible-roles/openjdk-java.git
+[submodule "roles/supervisor"]
+	path = roles/supervisor
+	url = git@gitlab.fronter.net:ansible-roles/supervisor.git
+[submodule "roles/arcanist"]
+	path = roles/arcanist
+	url = git@gitlab.fronter.net:ansible-roles/arcanist.git
+[submodule "roles/logrotate"]
+	path = roles/logrotate
+	url = git@gitlab.fronter.net:ansible-roles/logrotate.git
+[submodule "roles/gitsetup"]
+	path = roles/gitsetup
+	url = git@gitlab.fronter.net:ansible-roles/gitsetup.git

@@ -1,0 +1,41 @@
+---
+- name: Ensure Ansible apt module dependency is installed
+  sudo: yes
+  apt:
+    name: python-pycurl
+    state: present
+  tags:
+    - ansible
+    - elasticsearch
+
+- name: Ensure Elasticsearch apt key is added
+  sudo: yes
+  apt_key:
+    url: "http://packages.elasticsearch.org/GPG-KEY-elasticsearch"
+    id: "{{ es_key_id }}"
+    state: present
+  tags: elasticsearch
+
+- name: Ensure Elasticsearch apt repo is added
+  sudo: yes
+  apt_repository:
+    repo: "deb {{ es_repository }}/{{ es_install_base_version }}/debian stable main"
+    state: present
+    update_cache: true
+  tags: elasticsearch
+
+- name: Ensure Elasticsearch is installed
+  sudo: yes
+  apt:
+    name: elasticsearch
+    state: present
+    install_recommends: false
+  tags: elasticsearch
+
+- name: Ensure Elasticsearch is started
+  sudo: yes
+  service:
+    name: elasticsearch
+    state: started
+    enabled: true
+  tags: elasticsearch

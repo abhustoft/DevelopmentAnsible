@@ -1,0 +1,14 @@
+---
+- name: Create global .gitconfig
+  template:
+    src: gitconfig.j2
+    dest: "{{ git_config_dir }}/.gitconfig"
+  tags:
+    - gitsetup
+
+- name: Create global .gitignore
+  copy:
+    src: gitignore.global
+    dest: "{{ git_config_dir }}/.gitignore"
+  tags:
+    - gitsetup

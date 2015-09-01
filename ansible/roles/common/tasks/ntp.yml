@@ -1,0 +1,10 @@
+---
+- name: Set up NTP configuration
+  template:
+    src:  "ntp.conf.j2"
+    dest: "/etc/ntp.conf"
+  notify:
+    - Stop NTP service
+    - Run ntpdate
+    - Start NTP service
+  tags: ntp

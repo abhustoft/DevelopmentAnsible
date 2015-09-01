@@ -1,0 +1,16 @@
+---
+# Common handlers available everywhere
+- name: Reload systemd
+  command: systemctl daemon-reload
+
+- name: Stop NTP service
+  service: name="{{ 'ntpd' if ansible_os_family == 'RedHat' else 'ntp' }}" state=stopped
+
+- name: Run ntpdate
+  command: ntpdate {{ ntp_servers[0] if ntp_servers is defined else 'pool.ntp.org' }}
+
+- name: Start NTP service
+  service: name="{{ 'ntpd' if ansible_os_family == 'RedHat' else 'ntp' }}" state=started
+
+- name: Generate locales
+  command: locale-gen

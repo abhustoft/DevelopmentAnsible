@@ -1,0 +1,26 @@
+---
+# Override this with the groups you want created/removed
+#
+# Example:
+# group_list:
+#  - name:   fronter
+#    gid:    14503
+#    state:  present
+#    system: yes
+group_list: []
+
+# Override this with the users you want created/removed
+#
+# Example:
+# user_list:
+#  - name:    fronter
+#    comment: "Fronter application user"
+#    uid:     14503
+#    group:   fronter
+#    state:   present
+#    system:  yes
+#    shell:   "/bin/bash"
+user_list: []
+
+# The language to use
+locale_language: en_GB

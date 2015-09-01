@@ -1,0 +1,12 @@
+---
+- name: Ensure Elasticsearch plugins are installed
+  sudo: yes
+  command: >
+    /usr/share/elasticsearch/bin/plugin -i {{ item.name }}
+    creates=/usr/share/elasticsearch/plugins/{{ item.dirname }}
+  with_items: es_plugins
+  notify:
+    - Restart Elasticsearch
+  tags:
+    - elasticsearch
+    - plugins

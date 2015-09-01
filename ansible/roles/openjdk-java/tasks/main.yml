@@ -1,0 +1,8 @@
+---
+- name: Ensure Java Open JDK is installed
+  sudo: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+    install_recommends: false
+  with_items: java_versions

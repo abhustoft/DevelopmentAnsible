@@ -10,66 +10,27 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Just use the insecure_private_key for convenience
   config.ssh.insert_key = false
 
+    (1..3).each do |i|
+      config.vm.define "elastic-#{i}" do |node|
+        node.vm.hostname = "elastic-#{i}"
+        node.vm.network "forwarded_port", guest: 9200, host: "920#{i}"
+        node.vm.provision :shell, path: "bootstrapAnsible.sh"
+        node.vm.network "public_network", bridge: "wlan0"
 
-  config.vm.define "elastic1" do |elastic1|
-    elastic1.vm.hostname = "elastic1"
-    elastic1.vm.network "forwarded_port", guest: 9200, host: 9200
-    elastic1.vm.provision :shell, path: "bootstrapAnsible.sh"
-    elastic1.vm.network "public_network", bridge: "wlan0"
+        node.vm.provider "virtualbox" do |vb|
+             # Don't boot with headless mode
+             vb.gui = false
+             vb.name = "ElasticVM#{i}"
 
-    elastic1.vm.provider "virtualbox" do |vb|
-         # Don't boot with headless mode
-         vb.gui = false
-         vb.name = "ElasticVM1"
+             # Use VBoxManage to customize the VM. For example to change memory:
+             vb.customize ["modifyvm", :id, "--memory", "2048"]
+             #vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+             #vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
+        end
 
-         # Use VBoxManage to customize the VM. For example to change memory:
-         vb.customize ["modifyvm", :id, "--memory", "2048"]
-         #vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
-         #vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
-    end
-
-    elastic1.vm.provision "ansible" do |ansible|
-
-        ansible.sudo = true
-        ansible.sudo_user = 'root'
-        ansible.ask_sudo_pass = true
-        ansible.inventory_path = ".vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory"
-        #ansible.tags="debug"
-        ansible.playbook = "./ansible/elastic.yml"
-
-        ansible.groups = {
-            "elastic" => ["elastic1", "elastic2"],
-            "junior" => ["junior"]
-        }
-    end
-  end
-
-  config.vm.define "elastic2" do |elastic2|
-      elastic2.vm.hostname = "elastic2"
-      elastic2.vm.network "forwarded_port", guest: 9200, host: 9201
-      elastic2.vm.provision :shell, path: "bootstrapAnsible.sh"
-      elastic2.vm.network "public_network", bridge: "wlan0"
-
-      elastic2.vm.provider "virtualbox" do |vb|
-           # Don't boot with headless mode
-           vb.gui = false
-           vb.name = "ElasticVM2"
-
-           # Use VBoxManage to customize the VM. For example to change memory:
-           vb.customize ["modifyvm", :id, "--memory", "2048"]
-      end
-
-      elastic2.vm.provision "ansible" do |ansible|
-
-          ansible.sudo = true
-          ansible.sudo_user = 'root'
-          ansible.ask_sudo_pass = true
-
-          ansible.playbook = "./ansible/elastic.yml"
-          ansible.groups = {
-            "elastic" => ["elastic1", "elastic2"],
-            "junior" => ["junior"]
-          }
+        node.vm.provision "ansible" do |ansible|
+            ansible.playbook = "./ansible/elastic.yml"
+        end
       end
     end
 

@@ -1,0 +1,8 @@
+---
+# The official APT repository information.
+es_key_id:     "D88E42B4"
+es_repository: "http://packages.elasticsearch.org/elasticsearch"
+
+# Java version to install - override Java dependency role
+java_versions:
+  - openjdk-7-jre-headless

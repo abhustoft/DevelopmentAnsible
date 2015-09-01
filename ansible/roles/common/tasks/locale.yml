@@ -1,0 +1,18 @@
+---
+- name: Add our favourite locales to locale.gen
+  lineinfile: dest=/etc/locale.gen line="{{ item }}"
+  with_items:
+    - "en_GB.UTF-8 UTF-8"
+    - "en_US.UTF-8 UTF-8"
+    - "nb_NO.UTF-8 UTF-8"
+  notify:
+    - Generate locales
+  when:
+    ansible_os_family == "Debian"
+  tags: locale
+
+- name: "Set the default locale to proper English ;)"
+  template: src=locale.j2 dest=/etc/default/locale
+  tags: locale
+  when:
+    ansible_os_family == "Debian"

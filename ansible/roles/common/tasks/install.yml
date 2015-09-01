@@ -1,0 +1,41 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+  tags:
+    - install
+    - updatecache
+
+- name: Install basic packages
+  apt:
+    name:  "{{ item }}"
+    state: present
+  when: ansible_os_family == "Debian"
+  with_items:
+    - git
+    - sudo
+    - vim
+    - ntp
+    - ntpdate
+    - bash-completion
+    - zsh
+  tags: install
+
+- name: Set up EPEL
+  yum: name="epel-release" state=present enablerepo="extras"
+  when: ansible_os_family == "RedHat"
+
+- name: Install basic packages
+  yum:
+    name:  "{{ item }}"
+    state: present
+  when: ansible_os_family == "RedHat"
+  with_items:
+    - git
+    - sudo
+    - vim-enhanced
+    - ntp
+    - bash-completion
+    - zsh
+  tags: install
