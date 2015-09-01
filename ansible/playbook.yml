@@ -3,13 +3,15 @@
   remote_user: vagrant
   sudo: true
   sudo_user: root
+  gather_facts: yes
   tasks:
-    - name: log in as vagrant
-      shell: whoami
     - name: ensure ntpd is at the latest version
       apt: pkg=ntp state=latest
       notify:
       - restart ntpd
+    - command: echo {{ item }}
+      with_items: [ 0, 2, 4, 6, 8, 10 ]
+      when: item > 5
   handlers:
     - name: restart ntpd
       service: name=ntpd state=restarted
