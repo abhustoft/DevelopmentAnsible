@@ -32,6 +32,14 @@
     install_recommends: false
   tags: elasticsearch
 
+- name: Create symlink to config files
+  sudo: yes
+  file:
+    dest: /usr/share/elasticsearch/config
+    src: /etc/elasticsearch/
+    state: link
+  tags: elasticsearch
+
 - name: Ensure Elasticsearch is started
   sudo: yes
   service:
@@ -39,3 +47,7 @@
     state: started
     enabled: true
   tags: elasticsearch
+
+- name: Force start Elasticsearch
+  sudo: yes
+  shell: /usr/share/elasticsearch/start
