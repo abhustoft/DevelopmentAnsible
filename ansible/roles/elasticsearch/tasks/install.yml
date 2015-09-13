@@ -11,7 +11,7 @@
 - name: Ensure Elasticsearch apt key is added
   sudo: yes
   apt_key:
-    url: "http://packages.elasticsearch.org/GPG-KEY-elasticsearch"
+    url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
     id: "{{ es_key_id }}"
     state: present
   tags: elasticsearch
@@ -32,12 +32,10 @@
     install_recommends: false
   tags: elasticsearch
 
-- name: Create symlink to config files
+- name: Set access to log files
   sudo: yes
-  file:
-    dest: /usr/share/elasticsearch/config
-    src: /etc/elasticsearch/
-    state: link
+  file: path=/usr/share/elasticsearch/data/elasticsearch/nodes state=directory recurse=yes mode=0777
+  file: path=/usr/share/elasticsearch/logs state=directory recurse=yes mode=0777
   tags: elasticsearch
 
 - name: Ensure Elasticsearch is started
@@ -48,6 +46,3 @@
     enabled: true
   tags: elasticsearch
 
-- name: Force start Elasticsearch
-  sudo: yes
-  shell: /usr/share/elasticsearch/start

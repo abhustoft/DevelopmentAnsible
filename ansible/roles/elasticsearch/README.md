@@ -13,15 +13,15 @@ None
 The base version to install, and then it will install the latest patch
 version available
 
-    es_install_base_version: 1.5
+    es_install_base_version: 1.7
 
 A list of Elasticsearch plugins to install. The dirname is used to
 check if the plugin is already installed. This is typically overridden
 in your application plays
 
     es_plugins:
-      - name: elasticsearch/elasticsearch-cloud-aws/2.1.1
-        dirname: elasticsearch-cloud-aws
+      #- name: elasticsearch/elasticsearch-cloud-aws/2.1.1
+        #dirname: elasticsearch-cloud-aws
       - name: lmenezes/elasticsearch-kopf
         dirname: kopf
 

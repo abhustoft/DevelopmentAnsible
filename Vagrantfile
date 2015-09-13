@@ -20,7 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.provider "virtualbox" do |vb|
              # Don't boot with headless mode
              vb.gui = false
-             vb.name = "ElasticVM#{i}"
+             vb.name = "Elastic#{i}"
 
              # Use VBoxManage to customize the VM. For example to change memory:
              vb.customize ["modifyvm", :id, "--memory", "2048"]
