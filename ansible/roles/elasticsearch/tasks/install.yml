@@ -32,11 +32,20 @@
     install_recommends: false
   tags: elasticsearch
 
-- name: Set access to log files
+- name: Set access to log and node files
   sudo: yes
   file: path=/usr/share/elasticsearch/data/elasticsearch/nodes state=directory recurse=yes mode=0777
   file: path=/usr/share/elasticsearch/logs state=directory recurse=yes mode=0777
   tags: elasticsearch
+
+- name: Set cluster name
+  sudo: yes
+  lineinfile:
+      dest=/etc/elasticsearch/elasticsearch.yml
+      regexp='^#cluster.name'
+      line='cluster.name{{ ":" }} AlfBjorn'
+  tags: elasticsearch
+
 
 - name: Ensure Elasticsearch is started
   sudo: yes
