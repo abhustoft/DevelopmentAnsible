@@ -1,6 +1,6 @@
 ---
 - hosts: junior
   roles:
-    - aeriscloud.nodejs
-    - AsianChris.npm
+    - nodejs
+    - npm
     - martinmicunda.bower

@@ -8,4 +8,6 @@ es_install_base_version: 1.7
 # es_plugins:
 #  - fullname: "lmenezes/elasticsearch-kopf"
 #    dirname:  "kopf"
-es_plugins: []
+es_plugins:
+  - name: elasticsearch/marvel/latest
+    dirname: marvel

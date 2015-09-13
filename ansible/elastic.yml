@@ -1,5 +1,5 @@
 ---
-- hosts: dbs
+- hosts: elastic-[1,2]
   remote_user: vagrant
   sudo: true
   sudo_user: root

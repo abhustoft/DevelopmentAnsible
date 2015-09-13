@@ -51,17 +51,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     junior.vm.provision "ansible" do |ansible|
-
-        ansible.sudo = true
-        ansible.sudo_user = 'root'
-        ansible.ask_sudo_pass = true
-        #ansible.verbose = 'vvvv'
-
         ansible.playbook = "./ansible/junior.yml"
-        ansible.groups = {
-            "elastic" => ["elastic1", "elastic2"],
-            "junior" => ["junior"]
-        }
     end
 
   end
