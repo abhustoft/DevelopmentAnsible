@@ -1,0 +1,2 @@
+sudo chmod 777  /usr/share/elasticsearch/data/elasticsearch/nodes
+sudo chmod 777 /usr/share/elasticsearch/logs/*

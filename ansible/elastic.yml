@@ -1,5 +1,5 @@
 ---
-- hosts: elastic-[1,2]
+- hosts: elastic-[1,2,3]
   remote_user: vagrant
   sudo: true
   sudo_user: root
